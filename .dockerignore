@@ -1,0 +1,5 @@
+logs/
+fish/
+.gitignore
+input_data/
+artifacts/
