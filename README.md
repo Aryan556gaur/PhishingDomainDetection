@@ -9,10 +9,12 @@ Can be deployed on AWS App Runner for easy scalability and access.
 Alternatively, can be run locally for development or testing purposes.
 
 Installation
+
 Option 1: Deployment on AWS App Runner
 Create an AWS App Runner service using the provided Dockerfile.
 Push the Docker image to AWS ECR (Elastic Container Registry).
 Configure the App Runner service to use the ECR image.
+
 Option 2: Running Locally
 Install dependencies:
 Bash
