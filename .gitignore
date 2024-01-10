@@ -5,3 +5,4 @@ artifacts/
 build/
 dist/
 PhishingDomainDetection.egg-info/
+venv/

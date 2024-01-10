@@ -1,7 +1,7 @@
 import sys
 import pandas as pd
 import pickle,yaml
-import pymongo
+from pymongo.mongo_client import MongoClient
 from src.logger import logging
 from src.exception import CustomException
 
@@ -9,7 +9,7 @@ def import_data_as_Dataframe(database,collection):
     try:
         logging.info('Data importing Started')
 
-        client = pymongo.MongoClient('mongodb+srv://aryangaur556:Abhishek@cluster0.pfi4w9l.mongodb.net/?retryWrites=true&w=majority')
+        client = MongoClient('mongodb+srv://aryangaur556:Abhishek@cluster0.pfi4w9l.mongodb.net/?retryWrites=true&w=majority')
         data = client[database][collection]
         df = pd.DataFrame(data.find())
 

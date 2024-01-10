@@ -20,6 +20,7 @@ def predict_file():
             logging.info('Prediction Initiated')
 
             trainPipeline= TrainingPipeline()
+            trainPipeline.run_training_pipeline()
             predictpipeline=BatchPrediction(request)
             predicted_data=predictpipeline.initiate_file_prediction()
 

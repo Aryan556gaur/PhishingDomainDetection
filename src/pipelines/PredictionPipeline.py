@@ -21,7 +21,8 @@ class BatchPrediction:
 
     def save_file(self):
         input_file=self.request.files['file']
-        input_file_path=os.makedirs(os.path.join(self.predict_config.input_data_path,input_file.filename))
+        input_file_path=os.path.join(self.predict_config.input_data_path,input_file.filename)
+        os.makedirs(os.path.dirname(input_file_path),exist_ok=True)
         input_file.save(input_file_path)
 
         return input_file_path
@@ -43,7 +44,7 @@ class BatchPrediction:
 
             x=preprocessor.transform(x_df)
             y=pd.DataFrame(model.predict(x))
-
+            #os.makedirs(os.path.dirname(self.predict_config.predicted_data_path),exist_ok=True)
             predicted_data=pd.concat(x_df,y)
             predicted_data.to_csv(self.predict_config.predicted_data_path)
 

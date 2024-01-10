@@ -13,8 +13,8 @@ def import_data_as_Dataframe(database,collection):
         data = client[database][collection]
         df = pd.DataFrame(data.find())
 
-        if 'id' in df.columns:
-            df.drop('id',axis=1)
+        if '_id' in df.columns:
+            df.drop('_id',axis=1)
         return df
 
     except Exception as e:

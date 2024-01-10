@@ -21,21 +21,19 @@ class DataTransformation:
     def get_preprocessor(self,x_train):
 
         scaler=StandardScaler()
-        x_train=scaler.fit_transform(x_train)
+        x_train_experimental=scaler.fit_transform(x_train)
         pca=PCA()
-        pca.fit(x_train)
+        pca.fit(x_train_experimental)
         explained_variance_ratio = pca.explained_variance_ratio_
         cum_explained_variance = np.cumsum(explained_variance_ratio)
         n = np.argmax(cum_explained_variance>=0.95)+1
-        pca=PCA(n)
-        x_train=pca.fit_transform(x_train)
 
         preprocessor= Pipeline(steps=[
             ('scaler',StandardScaler()),
             ('PCA',PCA(n_components=n))
         ])
 
-        return preprocessor,x_train
+        return preprocessor
 
 
     def initiate_data_transformation(self,raw_data_path):
@@ -48,13 +46,15 @@ class DataTransformation:
             y=df['phishing']
 
             redundant_cols = np.var(x).keys()[np.var(x).values==0]
-            x.drop(redundant_cols,axis=1)
+            x.drop(redundant_cols,axis=1,inplace=True)
 
             x_train,x_test,y_train,y_test = train_test_split(x,y,test_size=0.33,random_state=42)
 
-            preprocessor,x_train=self.get_preprocessor(x_train)
+            preprocessor=self.get_preprocessor(x_train)
+            x_train=preprocessor.fit_transform(x_train)
             x_test=preprocessor.transform(x_test)
 
+            os.makedirs(os.path.dirname(self.transformation_config.preprocessor_path),exist_ok=True)
             save_obj(self.transformation_config.preprocessor_path, preprocessor)
 
             logging.info('Data Transformation Completed Successfully')
@@ -64,4 +64,4 @@ class DataTransformation:
         except Exception as e:
             logging.info('Error occurred in Data Transformation')
             raise CustomException(e,sys)
-        
+

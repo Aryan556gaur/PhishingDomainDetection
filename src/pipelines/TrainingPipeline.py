@@ -17,7 +17,7 @@ class TrainingPipeline:
             logging.info("Training Pipeline Execution starts")
 
             raw_data_path = self.data_ingestion.initiate_ingestion()
-            x_train,x_test,y_train,y_test = self.data_transformation.initiate_data_transformation(Raw_data_path=raw_data_path)
+            x_train,x_test,y_train,y_test = self.data_transformation.initiate_data_transformation(raw_data_path)
             self.model_trainer.initiate_model_trainer(x_train,x_test,y_train,y_test)
 
         except Exception as e:

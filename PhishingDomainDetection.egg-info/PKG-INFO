@@ -17,3 +17,4 @@ Requires-Dist: plotly
 Requires-Dist: nbformat>=4.2.0
 Requires-Dist: kneed
 Requires-Dist: pyyaml
+Requires-Dist: pathlib
