@@ -31,7 +31,6 @@ class BatchPrediction:
             logging.info('Batch Prediction initiated')
 
             x_df= pd.read_csv(input_data_path)
-            print(x_df.head())
             
             redundant_cols = ['qty_slash_domain','qty_questionmark_domain','qty_equal_domain','qty_and_domain',
             'qty_exclamation_domain','qty_space_domain','qty_tilde_domain','qty_comma_domain','qty_plus_domain',
