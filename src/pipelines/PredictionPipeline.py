@@ -44,7 +44,6 @@ class BatchPrediction:
             y=model.predict(x)
             x_df['Phishing']=[i for i in y]
             
-            os.makedirs(os.path.dirname(self.predict_config.predicted_data_path),exist_ok=True)
             x_df.to_csv(self.predict_config.predicted_data_path,index=False,header=True)
 
             logging.info('Batch Prediction Successfull')
