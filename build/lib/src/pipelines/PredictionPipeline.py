@@ -32,7 +32,7 @@ class BatchPrediction:
             logging.info('Batch Prediction initiated')
 
             input_data_path=self.save_file()
-            x_df= pd.DataFrame(input_data_path)
+            x_df= pd.read_csv(input_data_path)
             
             redundant_cols = ['qty_slash_domain','qty_questionmark_domain','qty_equal_domain','qty_and_domain',
             'qty_exclamation_domain','qty_space_domain','qty_tilde_domain','qty_comma_domain','qty_plus_domain',
@@ -44,9 +44,10 @@ class BatchPrediction:
 
             x=preprocessor.transform(x_df)
             y=pd.DataFrame(model.predict(x))
-            #os.makedirs(os.path.dirname(self.predict_config.predicted_data_path),exist_ok=True)
+            os.makedirs(os.path.dirname(self.predict_config.predicted_data_path),exist_ok=True)
             predicted_data=pd.concat(x_df,y)
-            predicted_data.to_csv(self.predict_config.predicted_data_path)
+            print(predicted_data.head())
+            predicted_data.to_csv(self.predict_config.predicted_data_path,index=False,header=True)
 
             logging.info('Batch Prediction Successfull')
             

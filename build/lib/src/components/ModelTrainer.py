@@ -28,29 +28,33 @@ class ModelTrainer:
             "DecisionTreeClassifier" : DecisionTreeClassifier(), 
             "RandomForestClassifier" : RandomForestClassifier(), 
             "GradientBoostingClassifier" : GradientBoostingClassifier(),
-            "SVC": SVC(),
-            "XGBClassifier": XGBClassifier()}
+            "SVC": SVC(), "XGBClassifier": XGBClassifier()}
 
             model_list={}
 
-            for i in range(len(models)):
+            # My device isn't capable for this
 
-                model = list(models.values())[i]
+            # for i in range(len(models)):
 
-                model.fit(x_train,y_train)
-                pred = model.predict(x_test)
+            #     model = list(models.values())[i]
 
-                score = accuracy_score(y_test,pred)
-                model_list[list(models.keys())[i]] = score
+            #     model.fit(x_train,y_train)
+            #     pred = model.predict(x_test)
 
-            i = np.argmax(list(model_list.values()))
-            best_model_name = list(model_list.keys())[i]
-            best_model_obj = models[best_model_name]
+            #     score = accuracy_score(y_test,pred)
+            #     model_list[list(models.keys())[i]] = score
 
-            grid = GridSearchCV(best_model_obj,param_grid=read_yaml('config\Model.yaml')['model_selection']['model'][best_model_name]['search_param_grid'],cv=5)
-            grid.fit(x_train,y_train)
-            parameters = grid.best_params_
-            final_model=best_model_obj(**parameters)
+            # i = np.argmax(list(model_list.values()))
+            # best_model_name = list(model_list.keys())[i]
+            # best_model_obj = models[best_model_name]
+
+            # grid = GridSearchCV(best_model_obj,param_grid=read_yaml(os.path.join('config','Model.yaml'))['model_selection']['model'][best_model_name]['search_param_grid'],cv=5)
+            # grid.fit(x_train,y_train)
+            # parameters = grid.best_params_
+            # final_model=best_model_obj(**parameters)
+
+            final_model=RandomForestClassifier(verbose=3)
+            final_model.fit(x_train,y_train)
 
             save_obj(self.model_config.model_path,final_model)
 

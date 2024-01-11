@@ -1,4 +1,4 @@
-import sys
+import os,sys
 import pandas as pd
 import pickle,yaml
 from pymongo.mongo_client import MongoClient
@@ -13,8 +13,8 @@ def import_data_as_Dataframe(database,collection):
         data = client[database][collection]
         df = pd.DataFrame(data.find())
 
-        if 'id' in df.columns:
-            df.drop('id',axis=1)
+        if '_id' in df.columns:
+            df.drop('_id',axis=1,inplace=True)
         return df
 
     except Exception as e:
@@ -31,6 +31,7 @@ def load_obj(filepath:str):
     
 def save_obj(filepath:str,file_obj):
     try:
+        os.makedirs(os.path.dirname(filepath),exist_ok=True)
         with open(filepath, 'wb') as file:
             pickle.dump(file_obj,file=file)
     except Exception as e:
@@ -40,7 +41,8 @@ def save_obj(filepath:str,file_obj):
 
 def read_yaml(filepath:str):
     try:
-        return yaml.safe_load(filepath)
+        with open(filepath, "rb") as yaml_file:
+            return yaml.safe_load(yaml_file)
     except Exception as e:
         logging.info('Error occurred in reading yaml file')
         raise CustomException(e,sys)  

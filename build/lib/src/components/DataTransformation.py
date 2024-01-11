@@ -40,7 +40,7 @@ class DataTransformation:
         try:
             logging.info('Data Transformation initiated')
 
-            df = pd.DataFrame(raw_data_path)
+            df = pd.read_csv(raw_data_path)
 
             x=df.drop('phishing',axis=1)
             y=df['phishing']

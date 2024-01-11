@@ -21,10 +21,11 @@ def predict_file():
 
             trainPipeline= TrainingPipeline()
             trainPipeline.run_training_pipeline()
-            predictpipeline=BatchPrediction(request)
-            predicted_data=predictpipeline.initiate_file_prediction()
+            predictpipeline=BatchPrediction()
+            input_data_path=predictpipeline.save_file(request)
+            predicted_data_path=predictpipeline.initiate_file_prediction(input_data_path)
 
-            send_file(path_or_file=predicted_data,download_name=predicted_data,as_attachment=True)
+            return send_file(path_or_file=predicted_data_path,download_name=predicted_data_path,as_attachment=True)
 
         else:
             return render_template('upload.html')

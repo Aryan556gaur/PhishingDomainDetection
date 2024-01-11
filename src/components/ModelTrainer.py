@@ -28,8 +28,7 @@ class ModelTrainer:
             "DecisionTreeClassifier" : DecisionTreeClassifier(), 
             "RandomForestClassifier" : RandomForestClassifier(), 
             "GradientBoostingClassifier" : GradientBoostingClassifier(),
-            "SVC": SVC(),
-            "XGBClassifier": XGBClassifier()}
+            "SVC": SVC(), "XGBClassifier": XGBClassifier()}
 
             model_list={}
 
@@ -47,11 +46,12 @@ class ModelTrainer:
             best_model_name = list(model_list.keys())[i]
             best_model_obj = models[best_model_name]
 
-            grid = GridSearchCV(best_model_obj,param_grid=read_yaml('config\Model.yaml')['model_selection']['model'][best_model_name]['search_param_grid'],cv=5)
+            grid = GridSearchCV(best_model_obj,param_grid=read_yaml(os.path.join('config','Model.yaml'))['model_selection']['model'][best_model_name]['search_param_grid'],cv=5)
             grid.fit(x_train,y_train)
             parameters = grid.best_params_
             final_model=best_model_obj(**parameters)
-
+            final_model.fit(x_train,y_train)
+            
             save_obj(self.model_config.model_path,final_model)
 
             logging.info('Best Model selected')

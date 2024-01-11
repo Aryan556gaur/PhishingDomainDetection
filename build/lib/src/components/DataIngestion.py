@@ -1,6 +1,5 @@
 import os, sys
 import pandas as pd
-from pathlib import Path
 from sklearn.model_selection import train_test_split
 from src.logger import logging
 from src.exception import CustomException
@@ -21,13 +20,13 @@ class DataIngestion:
         try:
             logging.info('Data ingestion Starts')
             os.makedirs(os.path.dirname(self.ingestion_config.raw_data_path),exist_ok=True)
-            df = import_data_as_Dataframe('database','PhishingDomainDetection')
+            df = import_data_as_Dataframe(database='database',collection='PhishingDomainDetection')
 
-            df.to_csv(self.ingestion_config.raw_data_path,index=False)
+            df.to_csv(self.ingestion_config.raw_data_path,index=False,header=True)
 
             train_data,test_data=train_test_split(df,test_size=0.33,random_state=42)
-            train_data.to_csv(self.ingestion_config.train_data_path,index=False)
-            test_data.to_csv(self.ingestion_config.test_data_path,index=False)
+            train_data.to_csv(self.ingestion_config.train_data_path,index=False,header=True)
+            test_data.to_csv(self.ingestion_config.test_data_path,index=False,header=True)
 
             logging.info('Data ingestion Completed')
 
