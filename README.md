@@ -34,14 +34,7 @@ Attributes based on URL parameters (e.g., number, length, suspicious values)
 Attributes based on resolving the URL and using external services (e.g., WHOIS information, domain reputation scores)
 
 Usage
-Send a POST request to the API endpoint with the domain name to be checked in the request body.
-The API will respond with a JSON object indicating whether the domain is legitimate or a potential phishing site.
-Example Usage
-Bash
-curl -X POST -H "Content-Type: application/json" -d '{"domain": "example.com"}' http://localhost:5000/predict
-Use code with caution.
-
-Or you may upload a file for Batch Prediction using route '/predict_file" and your file with predicted outputs will be downloaded in your system when request method is "POST"
+You can upload a file for Batch Prediction using route '/predict_file" and your file with predicted outputs will be downloaded in your system when request method is "POST"
 
 Contact
 https://www.linkedin.com/in/aryan-gaur-b49550258/
