@@ -12,6 +12,16 @@ application=app
 def home():
     return render_template('index.html')
 
+@app.route('train')
+def train_data():
+    try:
+        trainPipeline= TrainingPipeline()
+        trainPipeline.run_training_pipeline()
+        return render_template('index1.html')
+    except Exception as e:
+        raise CustomException(e,sys)
+
+#To avoid time delay run this route directly without running /train_data (if artifacts is present)
 @app.route('/predict_file',methods=['GET','POST'])
 def predict_file():
     try:
