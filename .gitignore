@@ -1,7 +1,6 @@
 logs/
 fish/
 input_data/
-artifacts/
 build/
 dist/
 PhishingDomainDetection.egg-info/
