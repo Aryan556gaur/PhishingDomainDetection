@@ -54,7 +54,6 @@ class DataTransformation:
             x_train=preprocessor.fit_transform(x_train)
             x_test=preprocessor.transform(x_test)
 
-            os.makedirs(os.path.dirname(self.transformation_config.preprocessor_path),exist_ok=True)
             save_obj(self.transformation_config.preprocessor_path, preprocessor)
 
             logging.info('Data Transformation Completed Successfully')

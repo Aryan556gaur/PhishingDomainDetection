@@ -12,7 +12,7 @@ class PredictionPipelineConfig:
     preprocessor_path=os.path.join('artifacts','preprocessor.pkl')
     model_path=os.path.join('artifacts','model.pkl')
     input_data_path='input_data'
-    predicted_data_path=os.path.join('artifacts','predictions.csv')
+    predicted_data_path=os.path.join('Predictions','predictions.csv')
 
 class BatchPrediction:
     def __init__(self):

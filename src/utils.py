@@ -31,7 +31,6 @@ def load_obj(filepath:str):
     
 def save_obj(filepath:str,file_obj):
     try:
-        os.makedirs(os.path.dirname(filepath),exist_ok=True)
         with open(filepath, 'wb') as file:
             pickle.dump(file_obj,file=file)
     except Exception as e:

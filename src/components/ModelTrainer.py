@@ -50,7 +50,7 @@ class ModelTrainer:
             grid.fit(x_train,y_train)
             parameters = grid.best_params_
             final_model=best_model_obj(**parameters)
-
+            final_model = RandomForestClassifier(verbose=3,n_estimators=3)
             final_model.fit(x_train,y_train)
 
             save_obj(self.model_config.model_path,final_model)
