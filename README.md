@@ -35,6 +35,7 @@ Attributes based on resolving the URL and using external services (e.g., WHOIS i
 
 Usage
 You can upload a file for Batch Prediction using route '/predict_file" and your file with predicted outputs will be downloaded in your system when request method is "POST"
+Aws Deployment link:- http://phishingdomain-env.eba-vs2eemyp.us-east-1.elasticbeanstalk.com/
 
 Contact
 https://www.linkedin.com/in/aryan-gaur-b49550258/
